@@ -230,7 +230,7 @@ class App extends React.Component<any, any> {
   public getNetwork = () => getChainData(this.state.chainId).network;
 
   public getProviderOptions = () => {
-    const infuraId = process.env.REACT_APP_INFURA_ID;
+    const infuraId = '8fa08e7cfeee48c8a8c28a8f55d6ae31';
     console.log("infuraId", infuraId);
     const providerOptions = {
       walletconnect: {

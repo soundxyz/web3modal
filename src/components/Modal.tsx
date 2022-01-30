@@ -10,6 +10,7 @@ import {
   MODAL_CARD_CLASSNAME
 } from "../constants";
 import { SimpleFunction, IProviderUserOptions, ThemeColors } from "../helpers";
+import { X, ArrowLeft } from "react-feather";
 
 declare global {
   // tslint:disable-next-line
@@ -64,15 +65,19 @@ interface IModalContainerStyleProps {
 
 const SModalContainer = styled.div<IModalContainerStyleProps>`
   position: relative;
-  width: 100%;
+  width: 500px;
   height: 100%;
-  padding: 15px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: ${({ show }) => (show ? 1 : 0)};
   visibility: ${({ show }) => (show ? "visible" : "hidden")};
   pointer-events: ${({ show }) => (show ? "auto" : "none")};
+  @media screen and (max-width: 768px) {
+    width: 100vw;
+    max-width: 450px;
+  }
 `;
 
 const SHitbox = styled.div`
@@ -100,19 +105,175 @@ const SModalCard = styled.div<IModalCardStyleProps>`
   visibility: ${({ show }) => (show ? "visible" : "hidden")};
   pointer-events: ${({ show }) => (show ? "auto" : "none")};
 
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
   max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : "800px")};
   min-width: fit-content;
   max-height: 100%;
   overflow: auto;
 
   @media screen and (max-width: 768px) {
+    position: absolute;
+    bottom: 0;
     max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : "500px")};
     grid-template-columns: 1fr;
+    margin: 0;
   }
 `;
 
+const ModalHeader = styled.div`
+  position: relative;
+  text-align: center;
+  padding: 1rem 0;
+  fontsize: 1.125rem;
+  fontweight: bold;
+  fontfamily: "Druk Wide Cy";
+  border-bottom: 1px solid #e5e6eb;
+  & > h1 {
+    font-size: 18px;
+  }
+`;
+
+const ModalClose = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 0.2rem;
+  right: 0.8rem;
+  top: 33%;
+  width: fit-content;
+  border-radius: 100px;
+  background: transparent;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(44, 122, 123, 0.1);
+    }
+  }
+`;
+
+const Back = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 0.2rem;
+  left: 0.8rem;
+  top: 33%;
+  width: fit-content;
+  border-radius: 100px;
+  background: transparent;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: rgba(44, 122, 123, 0.1);
+    }
+  }
+`;
+
+const Info = styled.p`
+  font-size: 12px;
+  margin: 1rem 0 2rem;
+  color: #4a5568;
+`;
+const InfoWallet = styled.p`
+  text-align: left;
+  font-size: 16px;
+  margin: 1rem 0 1rem;
+  color: #4a5568;
+  padding: 0.5rem 2rem;
+`;
+const ProviderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.5rem;
+`;
+
+const Wallet = styled.button`
+  width: fit-content;
+  margin: 0.5rem auto ;
+  padding: 1rem 2.5rem;
+  color: rgba(74, 85, 104, 0.6);
+  font-size: 16px;
+  border-radius: 20px;
+  background: transparent;
+  cursor: pointer;
+  @media (hover: hover) {
+    &:hover  {
+      background-color: #f3f4f6;
+    }
+`;
+
+const SIcon = styled.div`
+  width: 30px;
+  height: 30px;
+  display: flex;
+  border-radius: 50%;
+  overflow: visible;
+  box-shadow: none;
+  justify-content: center;
+  align-items: center;
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+interface IStyedThemeColorOptions {
+  themeColors: ThemeColors;
+}
+
+const SName = styled.div<IStyedThemeColorOptions>`
+  width: 100%;
+  font-size: 18px;
+  padding-right: 15px;
+  color: ${({ themeColors }) => themeColors.main};
+  @media screen and (max-width: 768px) {
+    font-size: 16px;
+  }
+`;
+
+const SProviderContainer = styled.a<IStyedThemeColorOptions>`
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  padding: 22px 25px;
+  margin: 0;
+
+  @media screen and (max-width: 768px) {
+    padding: 12px 32px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border: 2px solid black;
+    }
+  }
+`;
+
+const SProviderWrapper = styled.div<IStyedThemeColorOptions>`
+  width: 90%;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 20px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
 interface IModalProps {
   themeColors: ThemeColors;
   userOptions: IProviderUserOptions[];
@@ -124,12 +285,76 @@ interface IModalProps {
 interface IModalState {
   show: boolean;
   lightboxOffset: number;
+  step2: boolean;
 }
 
 const INITIAL_STATE: IModalState = {
   show: false,
+  step2: false,
   lightboxOffset: 0
 };
+
+const WalletProviders = ({
+  userOptions,
+  onClick,
+  themeColors
+}: {
+  userOptions: IProviderUserOptions[];
+  onClick: () => void;
+  themeColors: ThemeColors;
+}) => (
+  <ProviderContainer>
+    <Info>Hardware wallets unsupported at this time</Info>
+    {userOptions.map(provider =>
+      !!provider ? (
+        <Provider
+          themeColors={themeColors}
+          name={provider.name}
+          logo={provider.logo}
+          description={provider.description}
+          onClick={provider.onClick}
+        />
+      ) : null
+    )}
+    <Wallet onClick={onClick}>I don't have a wallet</Wallet>
+  </ProviderContainer>
+);
+
+const SetUpWallet = ({ themeColors }: { themeColors: ThemeColors }) => (
+  <ProviderContainer>
+    <InfoWallet>
+      Sound.xyz is compatible with any Ethereum wallet. We recommend Metamask on
+      desktop and Android, and Rainbow on iOS.
+    </InfoWallet>
+    <SProviderWrapper themeColors={themeColors}>
+      <SProviderContainer
+        themeColors={themeColors}
+        href="https://metamask.io/download/"
+        target="_blank"
+      >
+        <SIcon>
+          <img src="https://www.sound.xyz/icons/metamask.svg" alt="Metmask" />
+        </SIcon>
+        <SName themeColors={themeColors}>MetaMask</SName>
+      </SProviderContainer>
+    </SProviderWrapper>
+    <SProviderWrapper themeColors={themeColors}>
+      <SProviderContainer
+        themeColors={themeColors}
+        href="https://rainbow.me"
+        target="_blank"
+      >
+        <SIcon>
+          <img
+            src="https://www.sound.xyz/icons/rainbowWallet.png"
+            alt="Rainbow"
+          />
+        </SIcon>
+        <SName themeColors={themeColors}>Rainbow</SName>
+      </SProviderContainer>
+    </SProviderWrapper>
+  </ProviderContainer>
+);
 
 export class Modal extends React.Component<IModalProps, IModalState> {
   constructor(props: IModalProps) {
@@ -170,7 +395,7 @@ export class Modal extends React.Component<IModalProps, IModalState> {
   }
 
   public render = () => {
-    const { show, lightboxOffset } = this.state;
+    const { show, lightboxOffset, step2 } = this.state;
 
     const { onClose, lightboxOpacity, userOptions, themeColors } = this.props;
 
@@ -191,16 +416,35 @@ export class Modal extends React.Component<IModalProps, IModalState> {
             maxWidth={userOptions.length < 3 ? 500 : 800}
             ref={c => (this.mainModalCard = c)}
           >
-            {userOptions.map(provider =>
-              !!provider ? (
-                <Provider
-                  name={provider.name}
-                  logo={provider.logo}
-                  description={provider.description}
-                  themeColors={themeColors}
-                  onClick={provider.onClick}
-                />
-              ) : null
+            <ModalHeader>
+              {step2 && (
+                <Back
+                  onClick={() => {
+                    this.setState(state => ({
+                      step2: !state.step2
+                    }));
+                  }}
+                >
+                  <ArrowLeft />
+                </Back>
+              )}
+              <h1>{step2 ? "Recommended Wallets" : "Connect Wallet"}</h1>
+              <ModalClose onClick={onClose}>
+                <X />
+              </ModalClose>
+            </ModalHeader>
+            {step2 ? (
+              <SetUpWallet themeColors={themeColors} />
+            ) : (
+              <WalletProviders
+                userOptions={userOptions}
+                onClick={() => {
+                  this.setState(state => ({
+                    step2: !state.step2
+                  }));
+                }}
+                themeColors={themeColors}
+              />
             )}
           </SModalCard>
         </SModalContainer>
