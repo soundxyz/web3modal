@@ -28,7 +28,7 @@ jobs:
         id: changesets
         uses: changesets/action@master
         with:
-          publish: npm run publish 
+          publish: npm run release 
           commit: "chore(release): update package versions"
           title: "Upcoming Release Changes"
         env:
