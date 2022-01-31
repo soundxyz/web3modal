@@ -112,6 +112,11 @@ const SModalCard = styled.div<IModalCardStyleProps>`
   max-height: 100%;
   overflow: auto;
   font-size: 14px;
+
+  & p {
+    color: var(--chakra-colors-grey-900);
+    opacity: 0.5;
+  }
   @media screen and (max-width: 768px) {
     position: absolute;
     bottom: 0;
