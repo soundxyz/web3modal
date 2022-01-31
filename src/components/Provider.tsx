@@ -49,6 +49,7 @@ const SProviderContainer = styled.div<IStyedThemeColorOptions>`
   background-color: #F3F4F6;
   border-radius: 20px;
   padding: 22px 25px;
+  border: 2px solid transparent;
 
   @media screen and (max-width: 768px) {
     padding: 12px 32px;
@@ -56,7 +57,7 @@ const SProviderContainer = styled.div<IStyedThemeColorOptions>`
 
   @media (hover:hover) {
     &:hover {
-      border: 2px solid black;
+      border-color: black;
     }
   }
     

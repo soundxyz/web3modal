@@ -100,18 +100,18 @@ const SModalCard = styled.div<IModalCardStyleProps>`
   background-color: ${({ themeColors }) => themeColors.background};
   border-radius: 12px;
   margin: 10px;
-  padding: 0;
+  padding-bottom: 10px;
   opacity: ${({ show }) => (show ? 1 : 0)};
   visibility: ${({ show }) => (show ? "visible" : "hidden")};
   pointer-events: ${({ show }) => (show ? "auto" : "none")};
-
+  font-family: 'Druk Wide Cy' !important;
   display: flex;
   flex-direction: column;
   max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : "800px")};
   min-width: fit-content;
   max-height: 100%;
   overflow: auto;
-
+  font-size: 14px;
   @media screen and (max-width: 768px) {
     position: absolute;
     bottom: 0;
@@ -127,10 +127,10 @@ const ModalHeader = styled.div`
   padding: 1rem 0;
   fontsize: 1.125rem;
   fontweight: bold;
-  fontfamily: "Druk Wide Cy";
+  font-family: 'Druk Wide Cy' !important;
   border-bottom: 1px solid #e5e6eb;
   & > h1 {
-    font-size: 18px;
+    font-size: 14px;
   }
 `;
 
@@ -141,7 +141,7 @@ const ModalClose = styled.button`
   position: absolute;
   padding: 0.2rem;
   right: 0.8rem;
-  top: 33%;
+  top: 22%;
   width: fit-content;
   border-radius: 100px;
   background: transparent;
@@ -151,6 +151,10 @@ const ModalClose = styled.button`
     &:hover {
       background-color: rgba(44, 122, 123, 0.1);
     }
+  }
+
+  @media screen and (max-width: 768px) {
+    top: 20%;
   }
 `;
 
@@ -181,7 +185,7 @@ const Info = styled.p`
 `;
 const InfoWallet = styled.p`
   text-align: left;
-  font-size: 16px;
+  font-size: 14px;
   margin: 1rem 0 1rem;
   color: #4a5568;
   padding: 0.5rem 2rem;
@@ -249,6 +253,7 @@ const SProviderContainer = styled.a<IStyedThemeColorOptions>`
   border-radius: 20px;
   padding: 22px 25px;
   margin: 0;
+  border: 2px solid transparent;
 
   @media screen and (max-width: 768px) {
     padding: 12px 32px;
@@ -256,7 +261,7 @@ const SProviderContainer = styled.a<IStyedThemeColorOptions>`
 
   @media (hover: hover) {
     &:hover {
-      border: 2px solid black;
+      border-color: black;
     }
   }
 `;
