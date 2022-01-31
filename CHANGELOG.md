@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.1.1
+
+### Patch Changes
+
+- 7527b43: font change
+
 ## 0.1.0
 
 ### Minor Changes
