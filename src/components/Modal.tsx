@@ -104,7 +104,6 @@ const SModalCard = styled.div<IModalCardStyleProps>`
   opacity: ${({ show }) => (show ? 1 : 0)};
   visibility: ${({ show }) => (show ? "visible" : "hidden")};
   pointer-events: ${({ show }) => (show ? "auto" : "none")};
-  font-family: 'Druk Wide Cy' !important;
   display: flex;
   flex-direction: column;
   max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : "800px")};
@@ -132,9 +131,9 @@ const ModalHeader = styled.div`
   padding: 1rem 0;
   fontsize: 1.125rem;
   fontweight: bold;
-  font-family: 'Druk Wide Cy' !important;
   border-bottom: 1px solid #e5e6eb;
   & > h1 {
+    font-family: 'Druk Wide Cy' !important;
     font-size: 14px;
   }
 `;
