@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.3.2
+
+### Patch Changes
+
+- 157553e: Remove prop-types
+
 ## 0.3.1
 
 ### Patch Changes
