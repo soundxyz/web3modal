@@ -1,5 +1,5 @@
 ---
-"@gxlica/web3modal": minor
+"@soundxyz/web3modal": minor
 ---
 
 Allow customization of providers info message

@@ -166,7 +166,8 @@ class App extends React.Component<any, any> {
     this.web3Modal = new Web3Modal({
       network: this.getNetwork(),
       cacheProvider: true,
-      providerOptions: this.getProviderOptions()
+      providerOptions: this.getProviderOptions(),
+      providersInfoMessage: false
     });
   }
 
@@ -230,7 +231,7 @@ class App extends React.Component<any, any> {
   public getNetwork = () => getChainData(this.state.chainId).network;
 
   public getProviderOptions = () => {
-    const infuraId = '8fa08e7cfeee48c8a8c28a8f55d6ae31';
+    const infuraId = "8fa08e7cfeee48c8a8c28a8f55d6ae31";
     console.log("infuraId", infuraId);
     const providerOptions = {
       walletconnect: {
