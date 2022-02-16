@@ -7,7 +7,9 @@ import {
   MODAL_LIGHTBOX_CLASSNAME,
   MODAL_CONTAINER_CLASSNAME,
   MODAL_HITBOX_CLASSNAME,
-  MODAL_CARD_CLASSNAME
+  MODAL_CARD_CLASSNAME,
+  MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME,
+  MODAL_PROVIDERS_CONTAINER_CLASSNAME
 } from "../constants";
 import { SimpleFunction, IProviderUserOptions, ThemeColors } from "../helpers";
 import { X, ArrowLeft } from "react-feather";
@@ -133,7 +135,7 @@ const ModalHeader = styled.div`
   fontweight: bold;
   border-bottom: 1px solid #e5e6eb;
   & > h1 {
-    font-family: 'Druk Wide Cy' !important;
+    font-family: "Druk Wide Cy" !important;
     font-size: 14px;
   }
 `;
@@ -289,6 +291,7 @@ interface IModalProps {
   onClose: SimpleFunction;
   resetState: SimpleFunction;
   lightboxOpacity: number;
+  providersInfoMessage?: boolean | string;
 }
 
 interface IModalState {
@@ -303,17 +306,27 @@ const INITIAL_STATE: IModalState = {
   lightboxOffset: 0
 };
 
+const defaultProvidersInfoMessage = "Hardware wallets unsupported at this time";
+
 const WalletProviders = ({
   userOptions,
   onClick,
-  themeColors
+  themeColors,
+  providersInfoMessage = defaultProvidersInfoMessage
 }: {
   userOptions: IProviderUserOptions[];
   onClick: () => void;
   themeColors: ThemeColors;
+  providersInfoMessage?: boolean | string;
 }) => (
-  <ProviderContainer>
-    <Info>Hardware wallets unsupported at this time</Info>
+  <ProviderContainer className={MODAL_PROVIDERS_CONTAINER_CLASSNAME}>
+    {providersInfoMessage ? (
+      <Info className={MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME}>
+        {providersInfoMessage === true
+          ? defaultProvidersInfoMessage
+          : providersInfoMessage}
+      </Info>
+    ) : null}
     {userOptions.map(provider =>
       !!provider ? (
         <Provider
@@ -406,7 +419,13 @@ export class Modal extends React.Component<IModalProps, IModalState> {
   public render = () => {
     const { show, lightboxOffset, step2 } = this.state;
 
-    const { onClose, lightboxOpacity, userOptions, themeColors } = this.props;
+    const {
+      onClose,
+      lightboxOpacity,
+      userOptions,
+      themeColors,
+      providersInfoMessage
+    } = this.props;
 
     return (
       <SLightbox
@@ -453,6 +472,7 @@ export class Modal extends React.Component<IModalProps, IModalState> {
                   }));
                 }}
                 themeColors={themeColors}
+                providersInfoMessage={providersInfoMessage}
               />
             )}
           </SModalCard>

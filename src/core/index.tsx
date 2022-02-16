@@ -36,6 +36,7 @@ export class Core {
   private lightboxOpacity: number;
   private providerController: ProviderController;
   private userOptions: IProviderUserOptions[];
+  private options: ICoreOptions;
 
   constructor(opts?: Partial<ICoreOptions>) {
     const options: ICoreOptions = {
@@ -43,6 +44,7 @@ export class Core {
       ...opts
     };
 
+    this.options = options;
     this.lightboxOpacity = options.lightboxOpacity;
     this.themeColors = getThemeColors(options.theme);
 
@@ -155,6 +157,7 @@ export class Core {
         onClose={this.onClose}
         resetState={this.resetState}
         lightboxOpacity={this.lightboxOpacity}
+        providersInfoMessage={this.options.providersInfoMessage}
       />,
       document.getElementById(WEB3_CONNECT_MODAL_ID)
     );
