@@ -8,7 +8,8 @@ import {
   MODAL_CONTAINER_CLASSNAME,
   MODAL_HITBOX_CLASSNAME,
   MODAL_CARD_CLASSNAME,
-  MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME
+  MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME,
+  MODAL_PROVIDERS_CONTAINER_CLASSNAME
 } from "../constants";
 import { SimpleFunction, IProviderUserOptions, ThemeColors } from "../helpers";
 import { X, ArrowLeft } from "react-feather";
@@ -318,7 +319,7 @@ const WalletProviders = ({
   themeColors: ThemeColors;
   providersInfoMessage?: boolean | string;
 }) => (
-  <ProviderContainer>
+  <ProviderContainer className={MODAL_PROVIDERS_CONTAINER_CLASSNAME}>
     {providersInfoMessage ? (
       <Info className={MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME}>
         {providersInfoMessage === true
