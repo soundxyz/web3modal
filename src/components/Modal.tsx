@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as PropTypes from "prop-types";
 
 import { Provider } from "./Provider";
 import {
@@ -389,12 +388,6 @@ export class Modal extends React.Component<IModalProps, IModalState> {
       this.setState(state);
     };
   }
-  public static propTypes = {
-    userOptions: PropTypes.object.isRequired,
-    onClose: PropTypes.func.isRequired,
-    resetState: PropTypes.func.isRequired,
-    lightboxOpacity: PropTypes.number.isRequired
-  };
 
   public lightboxRef?: HTMLDivElement | null;
   public mainModalCard?: HTMLDivElement | null;
