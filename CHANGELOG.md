@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.3.1
+
+### Patch Changes
+
+- c553e3f: Fix styled-components usage in ESM
+
 ## 0.3.0
 
 ### Minor Changes
