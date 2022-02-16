@@ -418,7 +418,13 @@ export class Modal extends React.Component<IModalProps, IModalState> {
   public render = () => {
     const { show, lightboxOffset, step2 } = this.state;
 
-    const { onClose, lightboxOpacity, userOptions, themeColors } = this.props;
+    const {
+      onClose,
+      lightboxOpacity,
+      userOptions,
+      themeColors,
+      providersInfoMessage
+    } = this.props;
 
     return (
       <SLightbox
@@ -465,6 +471,7 @@ export class Modal extends React.Component<IModalProps, IModalState> {
                   }));
                 }}
                 themeColors={themeColors}
+                providersInfoMessage={providersInfoMessage}
               />
             )}
           </SModalCard>
