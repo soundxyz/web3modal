@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as PropTypes from "prop-types";
-import styled from "styled-components";
 
 import { Provider } from "./Provider";
 import {
@@ -11,7 +10,12 @@ import {
   MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME,
   MODAL_PROVIDERS_CONTAINER_CLASSNAME
 } from "../constants";
-import { SimpleFunction, IProviderUserOptions, ThemeColors } from "../helpers";
+import {
+  SimpleFunction,
+  IProviderUserOptions,
+  ThemeColors,
+  styled
+} from "../helpers";
 import { X, ArrowLeft } from "react-feather";
 
 declare global {

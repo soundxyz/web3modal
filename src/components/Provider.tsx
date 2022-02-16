@@ -1,12 +1,11 @@
 import * as React from "react";
-import styled from "styled-components";
 
-import { ThemeColors } from "../helpers";
+import { ThemeColors, styled } from "../helpers";
 import {
   PROVIDER_WRAPPER_CLASSNAME,
   PROVIDER_CONTAINER_CLASSNAME,
   PROVIDER_ICON_CLASSNAME,
-  PROVIDER_NAME_CLASSNAME,
+  PROVIDER_NAME_CLASSNAME
 } from "../constants";
 
 const SIcon = styled.div`
@@ -22,7 +21,6 @@ const SIcon = styled.div`
     width: 100%;
     height: 100%;
   }
-
 `;
 
 interface IStyedThemeColorOptions {
@@ -46,7 +44,7 @@ const SProviderContainer = styled.div<IStyedThemeColorOptions>`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   border-radius: 20px;
   padding: 22px 25px;
   border: 2px solid transparent;
@@ -55,12 +53,11 @@ const SProviderContainer = styled.div<IStyedThemeColorOptions>`
     padding: 12px 32px;
   }
 
-  @media (hover:hover) {
+  @media (hover: hover) {
     &:hover {
       border-color: black;
     }
   }
-    
 `;
 
 const SProviderWrapper = styled.div<IStyedThemeColorOptions>`
@@ -73,9 +70,8 @@ const SProviderWrapper = styled.div<IStyedThemeColorOptions>`
   cursor: pointer;
   border-radius: 20px;
   @media screen and (max-width: 768px) {
-    width:100%;
+    width: 100%;
   }
-  
 `;
 
 interface IProviderProps {
