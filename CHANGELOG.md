@@ -1,5 +1,12 @@
 # @gxlica/web3modal
 
+## 0.2.0
+
+### Minor Changes
+
+- 39f745c: Allow customization of providers info message
+- 89683ef: Create classname "web3modal-modal-providers-container" to allow customization of providers container
+
 ## 0.1.1
 
 ### Patch Changes
