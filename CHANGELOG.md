@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.3.0
+
+### Minor Changes
+
+- 71a3bb1: Build as ESM
+
 ## 0.2.0
 
 ### Minor Changes
