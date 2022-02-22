@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.3.3
+
+### Patch Changes
+
+- 2ea83be: Add missing key in mapped array
+
 ## 0.3.2
 
 ### Patch Changes
