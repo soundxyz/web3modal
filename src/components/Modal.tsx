@@ -330,9 +330,10 @@ const WalletProviders = ({
           : providersInfoMessage}
       </Info>
     ) : null}
-    {userOptions.map(provider =>
-      !!provider ? (
+    {userOptions.map((provider, index) =>
+      provider ? (
         <Provider
+          key={index}
           themeColors={themeColors}
           name={provider.name}
           logo={provider.logo}
