@@ -15,6 +15,7 @@ specifiers:
   '@types/styled-components': ^5.1.19
   '@typescript-eslint/eslint-plugin': ^4.5.0
   '@typescript-eslint/parser': ^4.5.0
+  '@walletconnect/utils': ^1.7.1
   '@walletconnect/web3-provider': ^1.7.0
   axios: ^0.21.2
   babel-eslint: ^10.1.0
@@ -99,6 +100,7 @@ dependencies:
   '@types/styled-components': 5.1.19
   '@typescript-eslint/eslint-plugin': 4.12.0_343306961d6b60bcf6bd09d193a54461
   '@typescript-eslint/parser': 4.12.0_eslint@7.17.0+typescript@4.1.3
+  '@walletconnect/utils': 1.7.1
   '@walletconnect/web3-provider': 1.7.0_@babel+core@7.12.3
   axios: 0.21.2
   babel-eslint: 10.1.0_eslint@7.17.0
@@ -2725,13 +2727,23 @@ packages:
       detect-browser: 5.2.0
     dev: false
 
+  /@walletconnect/browser-utils/1.7.1:
+    resolution: {integrity: sha512-y6KvxPhi52sWzS0/HtA3EhdgmtG8mXcxdc26YURDOVC/BJh3MxV8E16JFrT4InylOqYJs6dcSLWVfcnJaiPtZw==}
+    dependencies:
+      '@walletconnect/safe-json': 1.0.0
+      '@walletconnect/types': 1.7.1
+      '@walletconnect/window-getters': 1.0.0
+      '@walletconnect/window-metadata': 1.0.0
+      detect-browser: 5.2.0
+    dev: false
+
   /@walletconnect/client/1.7.0:
     resolution: {integrity: sha512-56aXK9Rb30cHhl4DMaUakz/3KG3Mr+/9h2iCvKDqAxmIeD931ahMZlBu86T7hGf4vboisZZEhj8/ZwiAM4Ukvg==}
     dependencies:
       '@walletconnect/core': 1.7.0
       '@walletconnect/iso-crypto': 1.7.0
       '@walletconnect/types': 1.7.0
-      '@walletconnect/utils': 1.7.0
+      '@walletconnect/utils': 1.7.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -2742,7 +2754,7 @@ packages:
     dependencies:
       '@walletconnect/socket-transport': 1.7.0
       '@walletconnect/types': 1.7.0
-      '@walletconnect/utils': 1.7.0
+      '@walletconnect/utils': 1.7.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -2773,7 +2785,7 @@ packages:
     resolution: {integrity: sha512-U76SSiXfgsfhZodxZCvOxgeQ4UMv4mVN+NEbPHiM5KpNsaxG/aKanUjxznNhrIffQNiVRc9TphsmDeQHggdZcA==}
     dependencies:
       '@walletconnect/types': 1.7.0
-      '@walletconnect/utils': 1.7.0
+      '@walletconnect/utils': 1.7.1
       eventemitter3: 4.0.7
       xhr2-cookies: 1.1.0
     dev: false
@@ -2783,7 +2795,7 @@ packages:
     dependencies:
       '@walletconnect/crypto': 1.0.1
       '@walletconnect/types': 1.7.0
-      '@walletconnect/utils': 1.7.0
+      '@walletconnect/utils': 1.7.1
     dev: false
 
   /@walletconnect/jsonrpc-types/1.0.0:
@@ -2831,7 +2843,7 @@ packages:
     resolution: {integrity: sha512-HSWGZxdxDtf8K1Kd1eD1QuObpoNxHui+A/+inuC8i8fcifDjZu85AeJIfCKQijlmgjLR/25Ry3eJFbYpRXxUjQ==}
     dependencies:
       '@walletconnect/types': 1.7.0
-      '@walletconnect/utils': 1.7.0
+      '@walletconnect/utils': 1.7.1
       ws: 7.5.3
     transitivePeerDependencies:
       - bufferutil
@@ -2842,13 +2854,17 @@ packages:
     resolution: {integrity: sha512-eoqnF+U04IuMfGIBsqYhAR6SIM2kzcrZM/RCVcomT/lIcsRoBwNxR+86+3Vn12/iaGnuAKn8xDZhZ47SLFmanQ==}
     dev: false
 
-  /@walletconnect/utils/1.7.0:
-    resolution: {integrity: sha512-DnYyKNMkpPUkbu6YwHfycvzlpx7Ro/qDPIDAuaNYT4FFWFyYxfx2ZY66kU3XklQivAc8dK7TyvYPJ08LWd8w4Q==}
+  /@walletconnect/types/1.7.1:
+    resolution: {integrity: sha512-X0NunEUgq46ExDcKo7BnnFpFhuZ89bZ04/1FtohNziBWcP2Mblp2yf+FN7iwmZiuZ3bRTb8J1O4oJH2JGP9I7A==}
+    dev: false
+
+  /@walletconnect/utils/1.7.1:
+    resolution: {integrity: sha512-7Lig9rruqTMaFuwEhBrArq1QgzIf2NuzO6J3sCUYCZh60EQ7uIZjekaDonQjiQJAbfYcgWUBm8qa0PG1TzYN3Q==}
     dependencies:
-      '@walletconnect/browser-utils': 1.7.0
+      '@walletconnect/browser-utils': 1.7.1
       '@walletconnect/encoding': 1.0.0
       '@walletconnect/jsonrpc-utils': 1.0.0
-      '@walletconnect/types': 1.7.0
+      '@walletconnect/types': 1.7.1
       bn.js: 4.11.8
       js-sha3: 0.8.0
       query-string: 6.13.5
@@ -2861,7 +2877,7 @@ packages:
       '@walletconnect/http-connection': 1.7.0
       '@walletconnect/qrcode-modal': 1.7.0
       '@walletconnect/types': 1.7.0
-      '@walletconnect/utils': 1.7.0
+      '@walletconnect/utils': 1.7.1
       web3-provider-engine: 16.0.1_@babel+core@7.12.3
     transitivePeerDependencies:
       - '@babel/core'
