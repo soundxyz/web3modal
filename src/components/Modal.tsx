@@ -1,37 +1,37 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { Provider } from "./Provider";
+import { Provider } from './Provider'
 import {
   MODAL_LIGHTBOX_CLASSNAME,
   MODAL_CONTAINER_CLASSNAME,
   MODAL_HITBOX_CLASSNAME,
   MODAL_CARD_CLASSNAME,
   MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME,
-  MODAL_PROVIDERS_CONTAINER_CLASSNAME
-} from "../constants";
+  MODAL_PROVIDERS_CONTAINER_CLASSNAME,
+} from '../constants'
 import {
   SimpleFunction,
   IProviderUserOptions,
   ThemeColors,
-  styled
-} from "../helpers";
-import { X, ArrowLeft } from "react-feather";
+  styled,
+} from '../helpers'
+import { X, ArrowLeft } from 'react-feather'
 
 declare global {
   // tslint:disable-next-line
   interface Window {
-    ethereum: any;
-    BinanceChain: any;
-    web3: any;
-    celo: any;
-    updateWeb3Modal: any;
+    ethereum: any
+    BinanceChain: any
+    web3: any
+    celo: any
+    updateWeb3Modal: any
   }
 }
 
 interface ILightboxStyleProps {
-  show: boolean;
-  offset: number;
-  opacity?: number;
+  show: boolean
+  offset: number
+  opacity?: number
 }
 
 const SLightbox = styled.div<ILightboxStyleProps>`
@@ -46,15 +46,15 @@ const SLightbox = styled.div<ILightboxStyleProps>`
   z-index: 2;
   will-change: opacity;
   background-color: ${({ opacity }) => {
-    let alpha = 0.4;
-    if (typeof opacity === "number") {
-      alpha = opacity;
+    let alpha = 0.4
+    if (typeof opacity === 'number') {
+      alpha = opacity
     }
-    return `rgba(0, 0, 0, ${alpha})`;
+    return `rgba(0, 0, 0, ${alpha})`
   }};
   opacity: ${({ show }) => (show ? 1 : 0)};
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
-  pointer-events: ${({ show }) => (show ? "auto" : "none")};
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  pointer-events: ${({ show }) => (show ? 'auto' : 'none')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,10 +62,10 @@ const SLightbox = styled.div<ILightboxStyleProps>`
   & * {
     box-sizing: border-box !important;
   }
-`;
+`
 
 interface IModalContainerStyleProps {
-  show: boolean;
+  show: boolean
 }
 
 const SModalContainer = styled.div<IModalContainerStyleProps>`
@@ -77,13 +77,13 @@ const SModalContainer = styled.div<IModalContainerStyleProps>`
   align-items: center;
   justify-content: center;
   opacity: ${({ show }) => (show ? 1 : 0)};
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
-  pointer-events: ${({ show }) => (show ? "auto" : "none")};
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  pointer-events: ${({ show }) => (show ? 'auto' : 'none')};
   @media screen and (max-width: 768px) {
     width: 100vw;
     max-width: 450px;
   }
-`;
+`
 
 const SHitbox = styled.div`
   position: absolute;
@@ -91,12 +91,12 @@ const SHitbox = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-`;
+`
 
 interface IModalCardStyleProps {
-  show: boolean;
-  themeColors: ThemeColors;
-  maxWidth?: number;
+  show: boolean
+  themeColors: ThemeColors
+  maxWidth?: number
 }
 
 const SModalCard = styled.div<IModalCardStyleProps>`
@@ -107,11 +107,11 @@ const SModalCard = styled.div<IModalCardStyleProps>`
   margin: 10px;
   padding-bottom: 10px;
   opacity: ${({ show }) => (show ? 1 : 0)};
-  visibility: ${({ show }) => (show ? "visible" : "hidden")};
-  pointer-events: ${({ show }) => (show ? "auto" : "none")};
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  pointer-events: ${({ show }) => (show ? 'auto' : 'none')};
   display: flex;
   flex-direction: column;
-  max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : "800px")};
+  max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : '800px')};
   min-width: fit-content;
   max-height: 100%;
   overflow: auto;
@@ -124,11 +124,11 @@ const SModalCard = styled.div<IModalCardStyleProps>`
   @media screen and (max-width: 768px) {
     position: absolute;
     bottom: 0;
-    max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : "500px")};
+    max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : '500px')};
     grid-template-columns: 1fr;
     margin: 0;
   }
-`;
+`
 
 const ModalHeader = styled.div`
   position: relative;
@@ -138,10 +138,10 @@ const ModalHeader = styled.div`
   fontweight: bold;
   border-bottom: 1px solid #e5e6eb;
   & > h1 {
-    font-family: "Druk Wide Cy" !important;
+    font-family: 'Druk Wide Cy' !important;
     font-size: 14px;
   }
-`;
+`
 
 const ModalClose = styled.button`
   display: flex;
@@ -165,7 +165,7 @@ const ModalClose = styled.button`
   @media screen and (max-width: 768px) {
     top: 20%;
   }
-`;
+`
 
 const Back = styled.button`
   display: flex;
@@ -185,27 +185,27 @@ const Back = styled.button`
       background-color: rgba(44, 122, 123, 0.1);
     }
   }
-`;
+`
 
 const Info = styled.p`
   font-size: 12px;
   margin: 1rem 0 2rem;
   color: #4a5568;
-`;
+`
 const InfoWallet = styled.p`
   text-align: left;
   font-size: 14px;
   margin: 1rem 0 1rem;
   color: #4a5568;
   padding: 0.5rem 2rem;
-`;
+`
 const ProviderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0.5rem;
-`;
+  padding: 0.5rem 0.5rem 0;
+`
 
 const Wallet = styled.button`
   width: fit-content;
@@ -220,7 +220,7 @@ const Wallet = styled.button`
     &:hover  {
       background-color: #f3f4f6;
     }
-`;
+`
 
 const SIcon = styled.div`
   width: 30px;
@@ -235,10 +235,10 @@ const SIcon = styled.div`
     width: 100%;
     height: 100%;
   }
-`;
+`
 
 interface IStyedThemeColorOptions {
-  themeColors: ThemeColors;
+  themeColors: ThemeColors
 }
 
 const SName = styled.div<IStyedThemeColorOptions>`
@@ -249,7 +249,7 @@ const SName = styled.div<IStyedThemeColorOptions>`
   @media screen and (max-width: 768px) {
     font-size: 16px;
   }
-`;
+`
 
 const SProviderContainer = styled.a<IStyedThemeColorOptions>`
   transition: background-color 0.2s ease-in-out;
@@ -273,7 +273,7 @@ const SProviderContainer = styled.a<IStyedThemeColorOptions>`
       border-color: black;
     }
   }
-`;
+`
 
 const SProviderWrapper = styled.div<IStyedThemeColorOptions>`
   width: 90%;
@@ -287,64 +287,120 @@ const SProviderWrapper = styled.div<IStyedThemeColorOptions>`
   @media screen and (max-width: 768px) {
     width: 100%;
   }
-`;
+`
 interface IModalProps {
-  themeColors: ThemeColors;
-  userOptions: IProviderUserOptions[];
-  onClose: SimpleFunction;
-  resetState: SimpleFunction;
-  lightboxOpacity: number;
-  providersInfoMessage?: boolean | string;
+  themeColors: ThemeColors
+  userOptions: IProviderUserOptions[]
+  onClose: SimpleFunction
+  resetState: SimpleFunction
+  lightboxOpacity: number
+  providersInfoMessage?: boolean | string
 }
 
+type StepState = 'main' | 'recommend' | 'no-metamask'
+
 interface IModalState {
-  show: boolean;
-  lightboxOffset: number;
-  step2: boolean;
+  show: boolean
+  lightboxOffset: number
+  step2: StepState
 }
 
 const INITIAL_STATE: IModalState = {
   show: false,
-  step2: false,
-  lightboxOffset: 0
-};
+  step2: 'main',
+  lightboxOffset: 0,
+}
 
-const defaultProvidersInfoMessage = "Hardware wallets unsupported at this time";
+const defaultProvidersInfoMessage = 'Hardware wallets unsupported at this time'
 
 const WalletProviders = ({
   userOptions,
   onClick,
   themeColors,
-  providersInfoMessage = defaultProvidersInfoMessage
+  providersInfoMessage = defaultProvidersInfoMessage,
 }: {
-  userOptions: IProviderUserOptions[];
-  onClick: () => void;
-  themeColors: ThemeColors;
-  providersInfoMessage?: boolean | string;
-}) => (
-  <ProviderContainer className={MODAL_PROVIDERS_CONTAINER_CLASSNAME}>
-    {providersInfoMessage ? (
-      <Info className={MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME}>
-        {providersInfoMessage === true
-          ? defaultProvidersInfoMessage
-          : providersInfoMessage}
-      </Info>
-    ) : null}
-    {userOptions.map((provider, index) =>
-      provider ? (
+  userOptions: IProviderUserOptions[]
+  onClick: (state: StepState) => void
+  themeColors: ThemeColors
+  providersInfoMessage?: boolean | string
+}) => {
+  const hasMetamask = !!userOptions.find(({ name }) => name === 'MetaMask')
+  const Metamask = {
+    name: 'MetaMask',
+    logo:
+      "data:image/svg+xml,%3csvg height='355' viewBox='0 0 397 355' width='397' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' fill-rule='evenodd' transform='translate(-1 -1)'%3e%3cpath d='m114.622644 327.195472 52.004717 13.810198v-18.05949l4.245283-4.249292h29.716982v21.246459 14.872523h-31.839624l-39.268868-16.997169z' fill='%23cdbdb2'/%3e%3cpath d='m199.528305 327.195472 50.943397 13.810198v-18.05949l4.245283-4.249292h29.716981v21.246459 14.872523h-31.839623l-39.268868-16.997169z' fill='%23cdbdb2' transform='matrix(-1 0 0 1 483.96227 0)'/%3e%3cpath d='m170.872644 287.889523-4.245283 35.056657 5.306604-4.249292h55.18868l6.367925 4.249292-4.245284-35.056657-8.490565-5.311615-42.452832 1.062323z' fill='%23393939'/%3e%3cpath d='m142.216984 50.9915022 25.471698 59.4900858 11.674528 173.158643h41.391511l12.735849-173.158643 23.349056-59.4900858z' fill='%23f89c35'/%3e%3cpath d='m30.7783023 181.657226-29.71698153 86.048161 74.29245393-4.249293h47.7594343v-37.181303l-2.122641-76.487253-10.613208 8.498583z' fill='%23f89d35'/%3e%3cpath d='m87.0283032 191.218134 87.0283028 2.124646-9.551886 44.617563-41.391511-10.623229z' fill='%23d87c30'/%3e%3cpath d='m87.0283032 192.280457 36.0849058 33.994334v33.994334z' fill='%23ea8d3a'/%3e%3cpath d='m123.113209 227.337114 42.452831 10.623229 13.79717 45.679888-9.551886 5.311615-46.698115-27.620398z' fill='%23f89d35'/%3e%3cpath d='m123.113209 261.331448-8.490565 65.864024 56.25-39.305949z' fill='%23eb8f35'/%3e%3cpath d='m174.056606 193.34278 5.306604 90.297451-15.919812-46.211049z' fill='%23ea8e3a'/%3e%3cpath d='m74.2924539 262.393771 48.8207551-1.062323-8.490565 65.864024z' fill='%23d87c30'/%3e%3cpath d='m24.4103777 355.878193 90.2122663-28.682721-40.3301901-64.801701-73.23113313 5.311616z' fill='%23eb8f35'/%3e%3cpath d='m167.688682 110.481588-45.636793 38.243627-35.0235858 42.492919 87.0283028 3.186969z' fill='%23e8821e'/%3e%3cpath d='m114.622644 327.195472 56.25-39.305949-4.245283 33.994334v19.121813l-38.207548-7.43626z' fill='%23dfcec3'/%3e%3cpath d='m229.245286 327.195472 55.18868-39.305949-4.245283 33.994334v19.121813l-38.207548-7.43626z' fill='%23dfcec3' transform='matrix(-1 0 0 1 513.679252 0)'/%3e%3cpath d='m132.665096 212.464593-11.674528 24.433427 41.39151-10.623229z' fill='%23393939' transform='matrix(-1 0 0 1 283.372646 0)'/%3e%3cpath d='m23.349057 1.06232296 144.339625 109.41926504-24.410378-59.4900858z' fill='%23e88f35'/%3e%3cpath d='m23.349057 1.06232296-19.10377392 58.42776294 10.61320772 63.7393781-7.42924541 4.249292 10.61320771 9.560906-8.49056617 7.436261 11.67452847 10.623229-7.4292454 6.373938 16.9811323 21.246459 79.5990577-24.433428c38.915096-31.161473 58.018869-47.096318 57.311322-47.804533-.707548-.708215-48.820756-37.1813036-144.339625-109.41926504z' fill='%238e5a30'/%3e%3cg transform='matrix(-1 0 0 1 399.056611 0)'%3e%3cpath d='m30.7783023 181.657226-29.71698153 86.048161 74.29245393-4.249293h47.7594343v-37.181303l-2.122641-76.487253-10.613208 8.498583z' fill='%23f89d35'/%3e%3cpath d='m87.0283032 191.218134 87.0283028 2.124646-9.551886 44.617563-41.391511-10.623229z' fill='%23d87c30'/%3e%3cpath d='m87.0283032 192.280457 36.0849058 33.994334v33.994334z' fill='%23ea8d3a'/%3e%3cpath d='m123.113209 227.337114 42.452831 10.623229 13.79717 45.679888-9.551886 5.311615-46.698115-27.620398z' fill='%23f89d35'/%3e%3cpath d='m123.113209 261.331448-8.490565 65.864024 55.18868-38.243626z' fill='%23eb8f35'/%3e%3cpath d='m174.056606 193.34278 5.306604 90.297451-15.919812-46.211049z' fill='%23ea8e3a'/%3e%3cpath d='m74.2924539 262.393771 48.8207551-1.062323-8.490565 65.864024z' fill='%23d87c30'/%3e%3cpath d='m24.4103777 355.878193 90.2122663-28.682721-40.3301901-64.801701-73.23113313 5.311616z' fill='%23eb8f35'/%3e%3cpath d='m167.688682 110.481588-45.636793 38.243627-35.0235858 42.492919 87.0283028 3.186969z' fill='%23e8821e'/%3e%3cpath d='m132.665096 212.464593-11.674528 24.433427 41.39151-10.623229z' fill='%23393939' transform='matrix(-1 0 0 1 283.372646 0)'/%3e%3cpath d='m23.349057 1.06232296 144.339625 109.41926504-24.410378-59.4900858z' fill='%23e88f35'/%3e%3cpath d='m23.349057 1.06232296-19.10377392 58.42776294 10.61320772 63.7393781-7.42924541 4.249292 10.61320771 9.560906-8.49056617 7.436261 11.67452847 10.623229-7.4292454 6.373938 16.9811323 21.246459 79.5990577-24.433428c38.915096-31.161473 58.018869-47.096318 57.311322-47.804533-.707548-.708215-48.820756-37.1813036-144.339625-109.41926504z' fill='%238e5a30'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e",
+    description: 'Connect to your MetaMask Wallet',
+  }
+
+  return (
+    <ProviderContainer className={MODAL_PROVIDERS_CONTAINER_CLASSNAME}>
+      {providersInfoMessage ? (
+        <Info className={MODAL_PROVIDERS_INFO_MESSAGE_CLASSNAME}>
+          {providersInfoMessage === true
+            ? defaultProvidersInfoMessage
+            : providersInfoMessage}
+        </Info>
+      ) : null}
+      {!hasMetamask && (
         <Provider
-          key={index}
           themeColors={themeColors}
-          name={provider.name}
-          logo={provider.logo}
-          description={provider.description}
-          onClick={provider.onClick}
+          name={Metamask.name}
+          logo={Metamask.logo}
+          description={Metamask.description}
+          onClick={() => onClick('no-metamask')}
         />
-      ) : null
-    )}
-    <Wallet onClick={onClick}>I don't have a wallet</Wallet>
+      )}
+      {userOptions.map((provider, index) =>
+        provider ? (
+          <Provider
+            key={index}
+            themeColors={themeColors}
+            name={provider.name}
+            logo={provider.logo}
+            description={provider.description}
+            onClick={provider.onClick}
+          />
+        ) : null,
+      )}
+      <Wallet onClick={() => onClick('recommend')}>
+        I don't have a wallet
+      </Wallet>
+    </ProviderContainer>
+  )
+}
+
+const MetamaskModal = ({
+  walletConnect,
+  themeColors,
+}: {
+  walletConnect: any
+  themeColors: ThemeColors
+}) => (
+  <ProviderContainer>
+    <InfoWallet>
+      You can use MetaMask by installing the browser extension or WalletConnect.
+    </InfoWallet>
+    <SProviderWrapper themeColors={themeColors}>
+      <SProviderContainer
+        themeColors={themeColors}
+        href="https://metamask.io/download/"
+        target="_blank"
+      >
+        <SIcon>
+          <img src="https://www.sound.xyz/icons/metamask.svg" alt="Metmask" />
+        </SIcon>
+        <SName themeColors={themeColors}>MetaMask</SName>
+      </SProviderContainer>
+    </SProviderWrapper>
+    <Provider
+      themeColors={themeColors}
+      name={walletConnect.name}
+      logo={walletConnect.logo}
+      description={walletConnect.description}
+      onClick={walletConnect.onClick}
+    />
   </ProviderContainer>
-);
+)
 
 const SetUpWallet = ({ themeColors }: { themeColors: ThemeColors }) => (
   <ProviderContainer>
@@ -380,57 +436,60 @@ const SetUpWallet = ({ themeColors }: { themeColors: ThemeColors }) => (
       </SProviderContainer>
     </SProviderWrapper>
   </ProviderContainer>
-);
+)
 
 export class Modal extends React.Component<IModalProps, IModalState> {
   constructor(props: IModalProps) {
-    super(props);
+    super(props)
     window.updateWeb3Modal = async (state: IModalState) => {
-      this.setState(state);
-    };
+      this.setState(state)
+    }
   }
 
-  public lightboxRef?: HTMLDivElement | null;
-  public mainModalCard?: HTMLDivElement | null;
+  public lightboxRef?: HTMLDivElement | null
+  public mainModalCard?: HTMLDivElement | null
 
   public state: IModalState = {
-    ...INITIAL_STATE
-  };
+    ...INITIAL_STATE,
+  }
 
   public componentDidUpdate(prevProps: IModalProps, prevState: IModalState) {
     if (prevState.show && !this.state.show) {
-      this.props.resetState();
+      this.props.resetState()
     }
     if (this.lightboxRef) {
-      const lightboxRect = this.lightboxRef.getBoundingClientRect();
-      const lightboxOffset = lightboxRect.top > 0 ? lightboxRect.top : 0;
+      const lightboxRect = this.lightboxRef.getBoundingClientRect()
+      const lightboxOffset = lightboxRect.top > 0 ? lightboxRect.top : 0
 
       if (
         lightboxOffset !== INITIAL_STATE.lightboxOffset &&
         lightboxOffset !== this.state.lightboxOffset
       ) {
-        this.setState({ lightboxOffset });
+        this.setState({ lightboxOffset })
       }
     }
   }
 
   public render = () => {
-    const { show, lightboxOffset, step2 } = this.state;
+    const { show, lightboxOffset, step2 } = this.state
 
     const {
       onClose,
       lightboxOpacity,
       userOptions,
       themeColors,
-      providersInfoMessage
-    } = this.props;
+      providersInfoMessage,
+    } = this.props
+
+
+    const walletConnect = userOptions.find(({ name }) => name === 'WalletConnect')
 
     return (
       <SLightbox
         className={MODAL_LIGHTBOX_CLASSNAME}
         offset={lightboxOffset}
         opacity={lightboxOpacity}
-        ref={c => (this.lightboxRef = c)}
+        ref={(c) => (this.lightboxRef = c)}
         show={show}
       >
         <SModalContainer className={MODAL_CONTAINER_CLASSNAME} show={show}>
@@ -440,42 +499,44 @@ export class Modal extends React.Component<IModalProps, IModalState> {
             show={show}
             themeColors={themeColors}
             maxWidth={userOptions.length < 3 ? 500 : 800}
-            ref={c => (this.mainModalCard = c)}
+            ref={(c) => (this.mainModalCard = c)}
           >
             <ModalHeader>
-              {step2 && (
+              {step2 !== 'main' && (
                 <Back
                   onClick={() => {
-                    this.setState(state => ({
-                      step2: !state.step2
-                    }));
+                    this.setState((state) => ({
+                      step2: 'main',
+                    }))
                   }}
                 >
                   <ArrowLeft />
                 </Back>
               )}
-              <h1>{step2 ? "Recommended Wallets" : "Connect Wallet"}</h1>
+              <h1>{step2 === 'recommend' ? 'Recommended Wallets' : 'Connect Wallet'}</h1>
               <ModalClose onClick={onClose}>
                 <X />
               </ModalClose>
             </ModalHeader>
-            {step2 ? (
-              <SetUpWallet themeColors={themeColors} />
-            ) : (
+            {step2 === 'recommend' && <SetUpWallet themeColors={themeColors} />}
+            {step2 === 'main' && (
               <WalletProviders
                 userOptions={userOptions}
-                onClick={() => {
-                  this.setState(state => ({
-                    step2: !state.step2
-                  }));
+                onClick={(state) => {
+                  this.setState(() => ({
+                    step2: state,
+                  }))
                 }}
                 themeColors={themeColors}
                 providersInfoMessage={providersInfoMessage}
               />
             )}
+            {step2 === 'no-metamask' && (
+              <MetamaskModal walletConnect={walletConnect} themeColors={themeColors} />
+            )}
           </SModalCard>
         </SModalContainer>
       </SLightbox>
-    );
-  };
+    )
+  }
 }

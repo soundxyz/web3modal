@@ -79,7 +79,7 @@ interface IProviderProps {
   logo: string;
   description: string;
   themeColors: ThemeColors;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export function Provider(props: IProviderProps) {
