@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.4.1
+
+### Patch Changes
+
+- 55f8c03: fix padding
+
 ## 0.4.0
 
 ### Minor Changes
