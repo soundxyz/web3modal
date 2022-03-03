@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.4.3
+
+### Patch Changes
+
+- d629fc7: Changed text on Metmask Modal
+
 ## 0.4.2
 
 ### Patch Changes
