@@ -413,7 +413,7 @@ const MetamaskModal = ({
         <SIcon>
           <img src="https://www.sound.xyz/icons/metamask.svg" alt="Metmask" />
         </SIcon>
-        <SName themeColors={themeColors}>MetaMask</SName>
+        <SName themeColors={themeColors}>Download MetaMask</SName>
       </AProviderContainer>
     </SProviderWrapper>
     <SProviderWrapper themeColors={themeColors} onClick={walletConnect.onClick}>
