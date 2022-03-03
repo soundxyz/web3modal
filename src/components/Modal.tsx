@@ -251,7 +251,31 @@ const SName = styled.div<IStyedThemeColorOptions>`
   }
 `
 
-const SProviderContainer = styled.a<IStyedThemeColorOptions>`
+const AProviderContainer = styled.a<IStyedThemeColorOptions>`
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  padding: 22px 25px;
+  margin: 0;
+  border: 2px solid transparent;
+
+  @media screen and (max-width: 768px) {
+    padding: 12px 32px;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      border-color: black;
+    }
+  }
+`
+
+const SProviderContainer = styled.div<IStyedThemeColorOptions>`
   transition: background-color 0.2s ease-in-out;
   width: 100%;
   display: flex;
@@ -381,7 +405,7 @@ const MetamaskModal = ({
       You can use MetaMask by installing the browser extension or WalletConnect.
     </InfoWallet>
     <SProviderWrapper themeColors={themeColors}>
-      <SProviderContainer
+      <AProviderContainer
         themeColors={themeColors}
         href="https://metamask.io/download/"
         target="_blank"
@@ -390,15 +414,16 @@ const MetamaskModal = ({
           <img src="https://www.sound.xyz/icons/metamask.svg" alt="Metmask" />
         </SIcon>
         <SName themeColors={themeColors}>MetaMask</SName>
+      </AProviderContainer>
+    </SProviderWrapper>
+    <SProviderWrapper themeColors={themeColors} onClick={walletConnect.onClick}>
+      <SProviderContainer themeColors={themeColors}>
+        <SIcon>
+          <img src={walletConnect.logo} alt="Wallet Connect" />
+        </SIcon>
+        <SName themeColors={themeColors}>{walletConnect.name}</SName>
       </SProviderContainer>
     </SProviderWrapper>
-    <Provider
-      themeColors={themeColors}
-      name={walletConnect.name}
-      logo={walletConnect.logo}
-      description={walletConnect.description}
-      onClick={walletConnect.onClick}
-    />
   </ProviderContainer>
 )
 
@@ -409,7 +434,7 @@ const SetUpWallet = ({ themeColors }: { themeColors: ThemeColors }) => (
       desktop and Android, and Rainbow on iOS.
     </InfoWallet>
     <SProviderWrapper themeColors={themeColors}>
-      <SProviderContainer
+      <AProviderContainer
         themeColors={themeColors}
         href="https://metamask.io/download/"
         target="_blank"
@@ -418,10 +443,10 @@ const SetUpWallet = ({ themeColors }: { themeColors: ThemeColors }) => (
           <img src="https://www.sound.xyz/icons/metamask.svg" alt="Metmask" />
         </SIcon>
         <SName themeColors={themeColors}>MetaMask</SName>
-      </SProviderContainer>
+      </AProviderContainer>
     </SProviderWrapper>
     <SProviderWrapper themeColors={themeColors}>
-      <SProviderContainer
+      <AProviderContainer
         themeColors={themeColors}
         href="https://rainbow.me"
         target="_blank"
@@ -433,7 +458,7 @@ const SetUpWallet = ({ themeColors }: { themeColors: ThemeColors }) => (
           />
         </SIcon>
         <SName themeColors={themeColors}>Rainbow</SName>
-      </SProviderContainer>
+      </AProviderContainer>
     </SProviderWrapper>
   </ProviderContainer>
 )
@@ -481,8 +506,9 @@ export class Modal extends React.Component<IModalProps, IModalState> {
       providersInfoMessage,
     } = this.props
 
-
-    const walletConnect = userOptions.find(({ name }) => name === 'WalletConnect')
+    const walletConnect = userOptions.find(
+      ({ name }) => name === 'WalletConnect',
+    )
 
     return (
       <SLightbox
@@ -513,8 +539,20 @@ export class Modal extends React.Component<IModalProps, IModalState> {
                   <ArrowLeft />
                 </Back>
               )}
-              <h1>{step2 === 'recommend' ? 'Recommended Wallets' : 'Connect Wallet'}</h1>
-              <ModalClose onClick={onClose}>
+              <h1>
+                {step2 === 'recommend'
+                  ? 'Recommended Wallets'
+                  : 'Connect Wallet'}
+              </h1>
+              <ModalClose
+                onClick={() => {
+                  this.setState((state) => ({
+                    step2: 'main',
+                    show: false,
+                  }))
+                  onClose
+                }}
+              >
                 <X />
               </ModalClose>
             </ModalHeader>
@@ -532,7 +570,10 @@ export class Modal extends React.Component<IModalProps, IModalState> {
               />
             )}
             {step2 === 'no-metamask' && (
-              <MetamaskModal walletConnect={walletConnect} themeColors={themeColors} />
+              <MetamaskModal
+                walletConnect={walletConnect}
+                themeColors={themeColors}
+              />
             )}
           </SModalCard>
         </SModalContainer>
