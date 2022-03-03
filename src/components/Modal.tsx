@@ -204,7 +204,7 @@ const ProviderContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0.5rem 0.5rem 0;
+  padding: 0.5rem;
 `
 
 const Wallet = styled.button`
