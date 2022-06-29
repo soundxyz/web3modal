@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.4.4
+
+### Patch Changes
+
+- b77e714: Update deps
+
 ## 0.4.3
 
 ### Patch Changes
