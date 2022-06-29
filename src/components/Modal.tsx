@@ -515,6 +515,7 @@ export class Modal extends React.Component<IModalProps, IModalState> {
         className={MODAL_LIGHTBOX_CLASSNAME}
         offset={lightboxOffset}
         opacity={lightboxOpacity}
+        // @ts-expect-error
         ref={(c) => (this.lightboxRef = c)}
         show={show}
       >
@@ -525,6 +526,7 @@ export class Modal extends React.Component<IModalProps, IModalState> {
             show={show}
             themeColors={themeColors}
             maxWidth={userOptions.length < 3 ? 500 : 800}
+            // @ts-expect-error
             ref={(c) => (this.mainModalCard = c)}
           >
             <ModalHeader>

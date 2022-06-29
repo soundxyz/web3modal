@@ -46,9 +46,9 @@
     "watch:example": "pnpm run bootstrap && pnpm run build && cd example && pnpm run build"
   },
   "dependencies": {
-    "detect-browser": "^5.1.0",
-    "react-feather": "^2.0.9",
-    "styled-components": "^5.3.3"
+    "detect-browser": "5.3.0",
+    "react-feather": "2.0.10",
+    "styled-components": "5.3.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
