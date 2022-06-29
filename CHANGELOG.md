@@ -1,5 +1,11 @@
 # @gxlica/web3modal
 
+## 0.4.6
+
+### Patch Changes
+
+- 8221849: revert ea762aaeb1f357fc0f4a8673675f52cd92970d1a
+
 ## 0.4.5
 
 ### Patch Changes
